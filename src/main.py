@@ -18,8 +18,10 @@ MOVE_SPEED = 200 # 100 px
 assetsDir = os.path.join(os.path.dirname(__file__),'assets')
 idle_sprite_sheet_path = os.path.join(assetsDir, "Punk_idle.png");
 running_sprite_sheet_path = os.path.join(assetsDir, "Punk_run.png");
+refriegator_idle_sprite_sheet_path = os.path.join(assetsDir, "enemy_idle.png");
 idle_sprite_sheet= pygame.image.load(idle_sprite_sheet_path).convert_alpha()
 running_sprite_sheet = pygame.image.load(running_sprite_sheet_path).convert_alpha()
+refriegator_idle_sprite_sheet = pygame.image.load(refriegator_idle_sprite_sheet_path).convert_alpha()
 
 
 # define frame properties
@@ -33,6 +35,11 @@ running_frame_height = running_sprite_sheet.get_height()
 running_frames = []
 running_total_frames = 6
 
+refriegator_idle_frame_width = refriegator_idle_sprite_sheet.get_width() // 6
+refriegator_idle_frame_height = refriegator_idle_sprite_sheet.get_height()
+refriegator_idle_frames = []
+refriegator_idle_total_frames = 6
+
 # extract frames
 # extract running frames
 for i in range(total_frames):
@@ -42,6 +49,10 @@ for i in range(total_frames):
 for i in range(running_total_frames):
     run_frame = running_sprite_sheet.subsurface((i * running_frame_width, 0, running_frame_width, running_frame_height))
     running_frames.append(run_frame)
+
+for i in range(refriegator_idle_total_frames):
+    refriegator_idle_frame = refriegator_idle_sprite_sheet.subsurface((i * refriegator_idle_frame_width, 0, refriegator_idle_frame_width, refriegator_idle_frame_height))
+    refriegator_idle_frames.append(refriegator_idle_frame)
 
 # create sprite class
 class Player(pygame.sprite.Sprite):
@@ -88,20 +99,56 @@ class Collectible(pygame.sprite.Sprite):
     def update(self):
 
         pass
-
 collectibles_group = pygame.sprite.Group()
+print(len(refriegator_idle_frames))
+class Enemy(pygame.sprite.Sprite):
+    # refrigertors have predifened spawn points
+    def __init__(self, x,y ):
+        super().__init__()
+        self.idle_images = refriegator_idle_frames
+        self.frames = self.idle_images
+        self.current_frame = 0
+        self.rect = self.frames[0].get_rect()
+        self.animation_speed = 0.1
+        self.frame_time = 0
+        self.state = IDLE
+        self.pos = [x,y]
+    def update(self, delta_time):
+        # update th fame based on animation speed
+        self.frame_time += delta_time
+        self.rect.center = (self.pos[0] + 10, self.pos[1] + 25)
+        self.rect = self.frames[0].get_rect(center = self.rect.center)
+        
+        #new_state = RUNNING if is_running else IDLE
+        #if new_state != self.state:
+        #    self.state = new_state
+        #    self.current_frame = 0
+        #    self.frames =self.running_images if is_running else self.idle_images
+        
+        if len(self.frames) > 0:
+            if self.frame_time >= self.animation_speed:
+                self.current_frame = (self.current_frame + 1) % len(self.frames)
+                self.frame_time = 0
+    def draw(self, surface):
+        surface.blit(self.frames[self.current_frame], self.pos)
+enemies_group = pygame.sprite.Group()
 
 for _ in range(5):
-    x = random.randint(0,320 - 20)
-    y = random.randint(0,320 - 20)
+    x = random.randint(0,1280 - 20)
+    y = random.randint(0,720 - 20)
     collectible = Collectible(x,y)
     collectibles_group.add(collectible)
-
+for _ in range(5):
+    x = random.randint(0, 1280 - 20)
+    y = random.randint(0,720 - 20)
+    enemy = Enemy(x,y)
+    enemies_group.add(enemy)
 
 player = Player()
 all_sprites = pygame.sprite.Group()
 all_sprites.add(player)
 all_sprites.add(collectibles_group)
+all_sprites.add(enemies_group)
 running = True
 
 
@@ -144,6 +191,10 @@ while running:
     #sprite.draw(sruface)
     # we then blit to that surface
     collectibles_group.draw(scaled_surface)
+    for enemy in enemies_group:
+        enemy.update(delta_time)
+        enemy.draw(scaled_surface)
+
     player.draw(scaled_surface)
     #pygame.draw.rect(scaled_surface, "RED",player.rect, 2)
     # figure out how to add enimeies
