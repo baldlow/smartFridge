@@ -1,6 +1,3 @@
-# smartFridge
-smartfridge
-
 # Table of Contents
 
 1. Intro
@@ -12,7 +9,7 @@ smartfridge
 
 # Intro
 
-Welcome to Feed the Fridge! The objective of this game is to collect food and feed the "freindly" fridges! This is my first game jam and I had fun making this game!
+Welcome to **Feed the Fridge!** The objective of this game is to collect food and feed the "freindly" fridges! This is my first game jam and I had fun making this game!
 
 # How to play
 
