@@ -30,11 +30,11 @@ Make sure you have Python 3.8+ and Pygame installed.
 
 In your terminal or command prompt, run:
 
-''' bash
-{
+``` bash
+
     pip install pygame
-}
-'''
+
+```
 
 # How to run
 
@@ -46,11 +46,11 @@ cd src
 '''
 4. Run the game with:
 
-'''bash
-{
+```bash
+
     python main.py
-}
-'''
+
+```
 
 ---
 
