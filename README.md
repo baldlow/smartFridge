@@ -9,7 +9,8 @@
 
 # Intro
 
-Welcome to **Feed the Fridge!** The objective of this game is to collect food and feed the "freindly" fridges! This is my first game jam and I had fun making this game!
+Welcome to **Feed the Fridge!** The objective of this game is to collect food and feed the "freindly" fridges! This is my first game jam and I had fun making this game! 
+This was part of https://itch.io/jam/mini-jam-169-future
 
 # How to play
 
