@@ -32,7 +32,7 @@ In your terminal or command prompt, run:
 
 '''bash
 {
-pip install pygame
+    pip install pygame
 }
 '''
 
@@ -47,7 +47,9 @@ cd src
 4. Run the game with:
 
 '''bash
-python main.py
+{
+    python main.py
+}
 '''
 
 ---
