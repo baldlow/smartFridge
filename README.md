@@ -41,9 +41,9 @@ In your terminal or command prompt, run:
 1. Download the game files from https://github.com/baldlow/smartFridge
 2. Or unzip the folder if downloaded as zip
 3. Open a terminal/command prompt and navigate to the game folder:
-'''bash
-cd src
-'''
+```bash
+    cd src
+```
 4. Run the game with:
 
 ```bash
