@@ -31,7 +31,9 @@ Make sure you have Python 3.8+ and Pygame installed.
 In your terminal or command prompt, run:
 
 '''bash
+{
 pip install pygame
+}
 '''
 
 # How to run
