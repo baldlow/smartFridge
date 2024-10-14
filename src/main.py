@@ -1,5 +1,4 @@
 import pygame
-import os
 import random
 
 # init pygame
@@ -21,18 +20,12 @@ BOUNDS_Y = (50,620)
 
 # get path of assest folder using os module
 # load sprite sheet for idle then for running as well
-assetsDir = os.path.join(os.path.dirname(__file__),'assets')
-idle_sprite_sheet_path = os.path.join(assetsDir, "Punk_idle.png");
-running_sprite_sheet_path = os.path.join(assetsDir, "Punk_run.png");
-refriegator_idle_sprite_sheet_path = os.path.join(assetsDir, "enemy_idle.png");
-refriegator_hungry_sprite_sheet_path = os.path.join(assetsDir, "enemy_hungry.png");
-idle_sprite_sheet= pygame.image.load(idle_sprite_sheet_path).convert_alpha()
-running_sprite_sheet = pygame.image.load(running_sprite_sheet_path).convert_alpha()
-refriegator_idle_sprite_sheet = pygame.image.load(refriegator_idle_sprite_sheet_path).convert_alpha()
-refriegator_hungry_sprite_sheet = pygame.image.load(refriegator_hungry_sprite_sheet_path).convert_alpha()
+idle_sprite_sheet= pygame.image.load("assets/Punk_idle.png").convert_alpha()
+running_sprite_sheet = pygame.image.load("assets/Punk_run.png").convert_alpha()
+refriegator_idle_sprite_sheet = pygame.image.load("assets/enemy_idle.png").convert_alpha()
+refriegator_hungry_sprite_sheet = pygame.image.load("assets/enemy_hungry.png").convert_alpha()
 
-background_path = os.path.join(assetsDir, "background.png");
-background = pygame.image.load(background_path)
+background = pygame.image.load("assets/background.png")
 background = pygame.transform.scale(background, (320,180))
 
 
@@ -126,7 +119,6 @@ class Collectible(pygame.sprite.Sprite):
 
         pass
 collectibles_group = pygame.sprite.Group()
-print(len(refriegator_idle_frames))
 class Enemy(pygame.sprite.Sprite):
     # refrigertors have predifened spawn points
     def __init__(self, x,y ):
